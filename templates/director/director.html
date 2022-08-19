@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+    <h1>{{ movie.director.first_name }} {{ movie.director.last_name }}</h1>
+    <img src="{{ movie.director.photo.url }}" class="img-fluid" alt="{{ movie.director.first_name }} {{ movie.director.last_name }}">
+
+    <div class="col">
+        <div class="row">
+            <i class="bi bi-star-fill"></i>
+{#                <img src="{% static "images/yellow_star.png" %}" alt="star">#}
+{#            <span>Rate this movie: <a href="{% url "movies:rate" movie.pk %}">here</a></span>#}
+
+            <p class="text">Birthday date: {{ movie.director.birthday }} </p>
+{#            <p class="text-dark"> Director: <a href=""> {{ movie.director.first_name }} {{ movie.director.last_name }}</a></p>#}
+            <p class="text-dark"> Actors:</p>
+{#            {% for actor in movie.actors.all %}#}
+{#                <p class="text-dark"><a href="#TODO"> {{ actor.first_name }} {{ actor.last_name }} </a></p>#}
+{#            {% endfor %}#}
+            <p class="text-dark"> Country: {{ movie.director.country }}</p>
+
+        </div>
+
+        <p class="text">{{ movie.description }}</p>
+    </div>
+
+
+{% endblock %}
+
