@@ -14,15 +14,13 @@
             <span>Rate this movie: <a href="{% url "movies:rate" movie.pk %}">here</a></span>
 
             <p class="text">Year: {{ movie.year }} </p>
-            <p class="text-dark"> Director: <a href="{% url 'director_detail' %}"> {{ movie.director.first_name }} {{ movie.director.last_name }}</a></p>
+            <p class="text-dark"> Director: <a href="{% url "crew:director" movie.director.pk %}" class="primary"> {{ movie.director.first_name }} {{ movie.director.last_name }}</a></p>
             <p class="text-dark"> Actors:</p>
             {% for actor in movie.actors.all %}
                 <p class="text-dark"><a href="#TODO"> {{ actor.first_name }} {{ actor.last_name }} </a></p>
             {% endfor %}
             <p class="text-dark"> Country: {{ movie.country.name }}</p>
             <p class="text-dark"> Genre: {{ movie.genre.all|join:", " }}</p>
-
-
 
         </div>
 

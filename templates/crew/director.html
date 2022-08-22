@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+    <h1>{{ director.first_name }} {{ director.last_name }}</h1>
+
+
+    <img src= "/media/directors_photo/richard_curtis.jpeg" width="400" class="img-fluid" alt="{{ director.first_name }} {{ director.last_name }}" title="Richard Curtis">
+
+{#    <img src="{{ director.photo.url }}" class="img-fluid" alt="{{ director.first_name }} {{ director.last_name }} ">#}
+
+    <div class="col">
+        <p class="row">
+            <p class="text">Birthday date: {{ director.birthday }} </p>
+{#            <p class="text-dark"> Movies: {{ director.movies.all|join:", " }}</p>#}
+            <p class="text-dark"> Country: {{ director.country.name }}</p>
+            <p class="text-dark"> Movies: </p>
+{#            {{ director.movies.all }}#}
+        <div>
+            {% for movie in director.movies.all %}
+{#                <p class="text-dark"><a href="#TODO"> {{ actor.first_name }} {{ actor.last_name }} </a></p>#}
+                <ul>
+                  <li class="text-dark"> {{ movie.title }} </li>
+                </ul>
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+
+{% endblock %}

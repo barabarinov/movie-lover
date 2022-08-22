@@ -7,5 +7,5 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 class DirectorDetailView(DetailView):
     model = Director
 
-    template_name = 'director/director.html'
+    template_name = 'crew/director.html'
     context_object_name = 'director'

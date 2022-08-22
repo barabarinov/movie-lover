@@ -40,14 +40,14 @@ class Movie(models.Model):
     )
 
     def __str__(self):
-        return self.title
+        return f'Movie: {self.title} {self.description} {self.year} {self.created_at} {self.director} {self.actors} {self.rates} {self.genre} {self.country}'
 
 
 class Genre(models.Model):
     title = models.CharField(max_length=128)
 
     def __str__(self):
-        return self.title
+        return f'Genre: {self.title}'
 
 
 class Rate(models.Model):

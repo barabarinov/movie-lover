@@ -4,12 +4,12 @@
     <h1>This is homepage</h1>
     <div class="row">
         {% for movie in movies %}
-            <div class="card" style="width: 18rem; margin: 2px">
+            <div class="card" style="width: 20rem; margin: 2px">
                 <img src="{{ movie.photo.url }}" class="card-img-top" alt="{{ movie.title }}">
                 <div class="card-body">
                     <h5 class="card-title">{{ movie.title }} ({{ movie.year }}) </h5>
                     <p class="card-text">{{ movie.description|truncatechars:150 }}</p>
-                    <a href="{% url "movies:detail" movie.pk %}" class="btn btn-primary">Check this movie...</a>
+                    <a href="{% url "movies:detail" movie.pk %}" class="btn btn-primary"> More...</a>
                 </div>
             </div>
         {% empty %}
