@@ -40,7 +40,8 @@ class Movie(models.Model):
     )
 
     def __str__(self):
-        return f'Movie: {self.title} {self.description} {self.year} {self.created_at} {self.director} {self.actors} {self.rates} {self.genre} {self.country}'
+        return (f'Movie: {self.title} {self.description} {self.year} {self.created_at} '
+               f'{self.director} {self.actors} {self.rates} {self.genre} {self.country}')
 
 
 class Genre(models.Model):
