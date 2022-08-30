@@ -10,22 +10,21 @@
     <div class="col">
         <div class="row">
             <i class="bi bi-star-fill"></i>
-{#                <img src="{% static "images/yellow_star.png" %}" alt="star">#}
+            {# <img src="{% static "images/yellow_star.png" %}" alt="star">#}
             <span>Rate this movie: <a href="{% url "movies:rate" movie.pk %}">here</a></span>
 
             <p class="text">Year: {{ movie.year }} </p>
             <p class="text-dark"> Director: <a href="{% url "crew:director" movie.director.pk %}" class="primary"> {{ movie.director.first_name }} {{ movie.director.last_name }}</a></p>
             <p class="text-dark"> Actors:</p>
             {% for actor in movie.actors.all %}
-                <p class="text-dark"><a href="#TODO"> {{ actor.first_name }} {{ actor.last_name }} </a></p>
+                <p class="text-dark"><a href=""> {{ actor.first_name }} {{ actor.last_name }} </a></p> {## TODO #}
             {% endfor %}
             <p class="text-dark"> Country: {{ movie.country.name }}</p>
-            <p class="text-dark"> Genre: {{ movie.genre.all|join:", " }}</p>
+            <p class="text-dark"> Genre: {{genres|join:", " }}</p> {## TODO #}
 
         </div>
 
-        <p class="text">{{ movie.description }}</p>
+        <p class="text"> Description: {{ movie.description }} </p>
     </div>
-
 
 {% endblock %}

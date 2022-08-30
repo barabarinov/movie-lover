@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>This is homepage</h1>
+    <h1>📽 Movies</h1>
     <div class="row">
         {% for movie in movies %}
-            <div class="card" style="width: 20rem; margin: 2px">
+            <div class="card" style="width: 23rem; margin: 2px">
                 <img src="{{ movie.photo.url }}" class="card-img-top" alt="{{ movie.title }}">
                 <div class="card-body">
                     <h5 class="card-title">{{ movie.title }} ({{ movie.year }}) </h5>
@@ -15,6 +15,7 @@
         {% empty %}
             <h2>No movies yet.</h2>
         {% endfor %}
+        <a href="{% url "movies:form" %}" class="btn btn-primary"> Fill the form...</a>
     </div>
 
 

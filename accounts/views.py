@@ -28,5 +28,8 @@ class LoginView(SuccessMessageMixin, auth_django_views.LoginView):
 class LogoutView(auth_django_views.LogoutView):
 
     def get_next_page(self):
-        messages.info(self.request, "You have successfully logged out")
+        messages.info(self.request, "🟩 You have successfully logged out")
         return reverse('core:home')
+
+    def get_redirect_url(self):
+        return super().get_redirect_url() or reverse('core:home')

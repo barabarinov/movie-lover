@@ -7,3 +7,4 @@ pip==22.2.2
 setuptools==58.1.0
 sqlparse==0.4.2
 psycopg2==2.9.3
+django-durationwidget==1.0.5
