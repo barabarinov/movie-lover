@@ -2,21 +2,34 @@
 
 {% block content %}
     <h1>📽 Movies</h1>
-    <div class="row">
-        {% for movie in movies %}
-            <div class="card" style="width: 23rem; margin: 2px">
-                <img src="{{ movie.photo.url }}" class="card-img-top" alt="{{ movie.title }}">
-                <div class="card-body">
-                    <h5 class="card-title">{{ movie.title }} ({{ movie.year }}) </h5>
-                    <p class="card-text">{{ movie.description|truncatechars:150 }}</p>
-                    <a href="{% url "movies:detail" movie.pk %}" class="btn btn-primary"> More...</a>
-                </div>
-            </div>
-        {% empty %}
-            <h2>No movies yet.</h2>
-        {% endfor %}
-        <a href="{% url "movies:form" %}" class="btn btn-primary"> Fill the form...</a>
-    </div>
+    <div class="d-flex flex-column">
 
+        <div class="row">
+            {% for movie in movies %}
+                <div class="col-12 col-md-4 col-lg-3">
+                    <div class="card h-100">
+                        <img src="{{ movie.photo.url }}" class="card-img-top pt-2"
+                                                         alt="{{ movie.title }}"
+                                                         title="{{ movie.title }}">
+
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title fw-bolder">{{ movie.title }} ({{ movie.year }}) </h5>
+                            <p class="card-text">{{ movie.description|truncatechars:150 }}</p>
+                            <a href="{% url "movies:detail" movie.pk %}" class="text-decoration-none mt-auto stretched-link"
+                                                                         title="{{ movie.title }}">More</a>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <h2>Nothing was found for your request! </h2>
+            {% endfor %}
+        </div>
+
+        <div class="d-grid gap-2 col-2 mx-auto mb-3 mt-3">
+            <a href="{% url "movies:form" %}" class="btn btn-outline-primary">Form</a>
+        </div>
+
+        {% include "paginator.html" %}
+    </div>
 
 {% endblock %}

@@ -1,30 +1,116 @@
 {% extends "base.html" %}
-
 {% load static %}
 
 {% block content %}
 
-    <h1>{{ movie.title }}</h1>
-    <img src="{{ movie.photo.url }}" class="img-fluid" alt="{{ movie.title }}">
+    <div class="h2 justify-content-center d-flex d-lg-none mb-3">{{ movie.title }} ({{ movie.year }})</div>
 
-    <div class="col">
-        <div class="row">
-            <i class="bi bi-star-fill"></i>
-            {# <img src="{% static "images/yellow_star.png" %}" alt="star">#}
-            <span>Rate this movie: <a href="{% url "movies:rate" movie.pk %}">here</a></span>
+    <div class="d-flex flex-column flex-lg-row gap-3 mb-3">
 
-            <p class="text">Year: {{ movie.year }} </p>
-            <p class="text-dark"> Director: <a href="{% url "crew:director" movie.director.pk %}" class="primary"> {{ movie.director.first_name }} {{ movie.director.last_name }}</a></p>
-            <p class="text-dark"> Actors:</p>
-            {% for actor in movie.actors.all %}
-                <p class="text-dark"><a href=""> {{ actor.first_name }} {{ actor.last_name }} </a></p> {## TODO #}
-            {% endfor %}
-            <p class="text-dark"> Country: {{ movie.country.name }}</p>
-            <p class="text-dark"> Genre: {{genres|join:", " }}</p> {## TODO #}
-
+        <div class="d-flex w-100 border p-2 gap-2 rounded">
+              <img src="{{ movie.photo.url }}" class=" img-fluid"
+                                               alt="{{ movie.title }}"
+                                               title="{{ movie.title }}">
         </div>
 
-        <p class="text"> Description: {{ movie.description }} </p>
+        <div class="d-flex w-100">
+            <div class="d-flex flex-column">
+
+                <div class="h1 d-none d-lg-flex mb-3">{{ movie.title }} ({{ movie.year }})</div>
+
+                <div class="d-flex flex-column mb-3">
+                    <i class="bi bi-star-fill">
+                        {% for i in "123" %}
+                            <img src="{% static "images/yellow_star.png" %}" alt="star" style="width:42px;height:42px;">
+                        {% endfor %}
+                        {% for i in "12" %}
+                            <img src="{% static "images/black_star.png" %}" alt="star" style="width:42px;height:42px;">
+                        {% endfor %}
+                    </i>
+                    <span class="mt-2">
+                        <span class="fw-bolder">
+                            Rate this movie:
+                        </span>
+                        <a href="{% url "movies:rate" movie.pk %}" class="text-decoration-none">here</a>
+                    </span>
+                </div>
+
+            <div class="d-flex flex-column border p-2 pb-3 gap-2 rounded">
+                <div class="text-dark">
+                    <span class="fw-bolder">Director:</span>
+                    <a href="{% url "crew:director" movie.director.pk %}" class="text-decoration-none">
+                        {{ movie.director.first_name }} {{ movie.director.last_name }}
+                    </a>
+                </div>
+
+                <div class="d-flex flex-wrap">
+                    <div class="me-1">
+                        <span class="fw-bolder mb-3">Actors:</span>
+                    </div>
+                    {% for actor in movie.actors.all %}
+                        <div class="text-dark me-1">
+                            <a href="{% url "crew:actor" actor.pk %}" class="text-decoration-none">
+                                {{ actor.first_name }} {{ actor.last_name }}{% include "movies/comma.html" %}
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <div class="d-flex">
+                    <div class="me-1">
+                        <span class="fw-bolder">Country:</span>
+                    </div>
+                    <div class="text-dark me-1">
+                        <a href="{% url "core:home" %}?country={{ movie.country.name }}" class="text-decoration-none">
+                            {{ movie.country.name }}</a>
+                    </div>
+                </div>
+
+                <div class="d-flex">
+                    <div class="me-1">
+                        <span class="fw-bolder">Year:</span>
+                    </div>
+                    <div class="text-dark me-1">
+                        <a href="{% url "core:home" %}?year={{ movie.year }}" class="text-decoration-none">
+                            {{ movie.year }}</a>
+                    </div>
+                </div>
+
+                <div class="d-flex">
+                    <div class="me-1">
+                        <span class="fw-bolder">Genre:</span>
+                    </div>
+                    {% for genre in movie.genre.all %}
+                        <div class="text-dark me-1">
+                            <a href="{% url "core:home" %}?genre={{ genre.id }}" class="text-decoration-none">
+                                {{ genre.title }}{% include "movies/comma.html" %}
+                            </a>
+                        </div>
+                    {% endfor %}
+
+                </div>
+
+                 <div class="text-dark">
+                     <span class="fw-bolder">Description:</span>
+                     {{ movie.description }}
+                 </div>
+
+            </div>
+            </div>
+        </div>
+
+    </div>
+    <div>
+        <div class="h3 text mb-2"> Trailer: </div>
+            <div class="border p-2 gap-2 rounded">
+                <div class="ratio ratio-16x9">
+                    <iframe width="560" height="315" src="{{ trailer_url }}"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
     </div>
 
 {% endblock %}

@@ -22,7 +22,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'durationwidget',
+    'django.contrib.postgres',  # To use the search lookup, 'django.contrib.postgres' must be in your INSTALLED_APPS.
 
     # Installed apps
     'crispy_forms',
@@ -33,6 +33,8 @@ INSTALLED_APPS = [
     'core',
     'crew',
     'movies',
+    'durationwidget',
+    'embed_video',
 ]
 
 MIDDLEWARE = [

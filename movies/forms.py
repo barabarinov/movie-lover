@@ -2,6 +2,7 @@ import datetime
 
 from movies.models import Rate, Movie
 from django import forms
+from django.contrib.admin.widgets import AdminDateWidget
 
 
 class RateMovieForm(forms.ModelForm):
@@ -13,13 +14,15 @@ class RateMovieForm(forms.ModelForm):
 
 
 class MyForm(forms.Form):
-    fav_movie = forms.CharField(label='Favorite Movie', required=False, initial='Matrix')
-    fav_actor = forms.CharField(label='Favorite Actor', initial='Denzel Washington')
-    fav_director = forms.CharField(label='Favorite Director', initial='Steven Spilberg')
-    email_field = forms.EmailField(label='Email', initial='user@mail.com')
+    fav_movie = forms.CharField(label='Favorite Movies', required=False, initial=None)
+    fav_actor = forms.CharField(label='Favorite Actors', initial=None)
+    fav_director = forms.CharField(label='Favorite Director', initial=None)
     date_field = forms.DateField(label='Birthday',
                                  widget=forms.SelectDateWidget(years=range(datetime.datetime.now().year, 1944, -1)))
-    int_field = forms.IntegerField(label='Favorite Number', initial='0')
+    int_field = forms.IntegerField(label='Favorite Number', initial=None)
+    email_field = forms.EmailField(label='Email',
+                                   initial=None)
+
     password = forms.CharField(max_length=20,
                                min_length=8,
                                widget=forms.PasswordInput)

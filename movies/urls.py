@@ -1,5 +1,10 @@
 from django.urls import path
-from .views import MovieDetailView, MoviesListView, RateMovieView, MyFormView
+from .views import (
+    MovieDetailView,
+    MoviesListView,
+    RateMovieView,
+    MyFormView,
+)
 
 app_name = 'movies'
 

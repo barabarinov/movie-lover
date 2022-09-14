@@ -4,31 +4,48 @@
 
 {% block content %}
 
-    <h1>{{ director.first_name }} {{ director.last_name }}</h1>
-
-
-    <img src= "/media/directors_photo/richard_curtis.jpeg" width="400" class="img-fluid" alt="{{ director.first_name }} {{ director.last_name }}" title="Richard Curtis">
-
-{#    <img src="{{ director.photo.url }}" class="img-fluid" alt="{{ director.first_name }} {{ director.last_name }} ">#}
-
-    <div class="col">
-        <p class="row">
-            <p class="text">Birthday date: {{ director.birthday }} </p>
-{#            <p class="text-dark"> Movies: {{ director.movies.all|join:", " }}</p>#}
-            <p class="text-dark"> Country: {{ director.country.name }}</p>
-            <p class="text-dark"> Movies: </p>
-{#            {{ director.movies.all }}#}
-        <div>
-            {% for movie in director.movies.all %}
-{#                <p class="text-dark"><a href="#TODO"> {{ actor.first_name }} {{ actor.last_name }} </a></p>#}
-                <ul>
-                  <li class="text-dark"> {{ movie.title }} </li>
-                </ul>
-            {% endfor %}
-
-        </div>
-
+    <div class="h2 justify-content-center d-flex d-lg-none mb-3">
+        {{ director.first_name }} {{ director.last_name }}
     </div>
 
+    <div class="d-flex flex-column flex-lg-row gap-3 mb-3">
+
+        <div class="d-flex w-100 border p-2 gap-2 rounded">
+            <img src="{{ director.photo.url }}" class="img-fluid"
+                                             alt="{{ director.first_name }} {{ director.last_name }}"
+                                             title="{{ director.first_name }} {{ director.last_name }}">
+        </div>
+
+        <div class="d-flex w-100">
+            <div class="d-flex flex-column">
+
+                <div class="h1 d-none d-lg-flex mb-3">{{ director.first_name }} {{ director.last_name }}</div>
+
+                <div class="d-flex flex-column border p-2 pb-3 gap-2 rounded">
+                    <div class="text-dark">
+                        <span class="fw-bolder">Birthday date:</span>
+                        <span class="text-dark"></span> {{ director.birthday }}
+                    </div>
+
+                    <div class="text-dark">
+                        <span class="fw-bolder">Country:</span> {{ director.country.name }}
+                    </div>
+
+                    <div class="d-flex">
+                        <div class="me-1">
+                            <span class="fw-bolder">Movies:</span>
+                        </div>
+                        {% for movie in director.movies.all %}
+                            <div class="text-dark me-1">
+                                <a href="{% url "movies:detail" movie.pk %}" class="text-decoration-none">
+                                    {{ movie.title }}{% include "movies/comma.html" %}
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}

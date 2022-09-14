@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+    <div class="h2 justify-content-center d-flex d-lg-none mb-3">
+        {{ actor.first_name }} {{ actor.last_name }}
+    </div>
+
+    <div class="d-flex flex-column flex-lg-row gap-3 mb-3">
+
+        <div class="d-flex w-100 border p-2 gap-2 rounded">
+            <img src="{{ actor.photo.url }}" class="img-fluid"
+                                             alt="{{ actor.first_name }} {{ actor.last_name }}"
+                                             title="{{ actor.first_name }} {{ actor.last_name }}">
+        </div>
+
+        <div class="d-flex w-100">
+            <div class="d-flex flex-column">
+
+                <div class="h1 d-none d-lg-flex mb-3">{{ actor.first_name }} {{ actor.last_name }}</div>
+
+                <div class="d-flex flex-column border p-2 pb-3 gap-2 rounded">
+                    <div class="text-dark">
+                        <span class="fw-bolder">Birthday date:</span>
+                        <span class="text-dark"></span> {{ actor.birthday }}
+                    </div>
+
+                    <div class="text-dark">
+                        <span class="fw-bolder">Country:</span> {{ actor.country.name }}
+                    </div>
+
+                    <div class="d-flex flex-wrap">
+                        <div class="me-1">
+                            <span class="fw-bolder">Movies:</span>
+                        </div>
+                        {% for movie in actor.movies.all %}
+                            <div class="text-dark me-1">
+                                <a href="{% url "movies:detail" movie.pk %}" class="text-decoration-none">
+                                    {{ movie.title }}{% include "movies/comma.html" %}
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
