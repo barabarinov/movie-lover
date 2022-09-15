@@ -1,7 +1,5 @@
-from django.urls import reverse_lazy
 from django.views.generic import DetailView
 from crew.models import Director, Actor
-from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class DirectorDetailView(DetailView):
@@ -14,5 +12,3 @@ class ActorDetailView(DetailView):
     model = Actor
     template_name = 'crew/actor.html'
     context_object_name = 'actor'
-
-

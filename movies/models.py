@@ -1,7 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 from embed_video.fields import EmbedVideoField
-from django.urls import reverse
 
 User = get_user_model()
 
@@ -45,9 +44,6 @@ class Movie(models.Model):
     def __str__(self):
         return (f'Movie: {self.title} {self.description} {self.year} {self.created_at} '
                 f'{self.director} {self.actors} {self.rates} {self.genre} {self.country}')
-
-    # def get_absolute_url(self):
-    #     return reverse()
 
 
 class Genre(models.Model):
